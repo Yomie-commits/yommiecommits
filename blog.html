@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Blog</title>
+    
+    <!-- Internal CSS -->
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 2;
+            padding: 2;
+            background-color: #f4EEE3;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background-color: #C9B09A;
+            color:#333;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Blog Section */
+        section#blog {
+             background-color:#F7D9BC;
+               color: #333;
+            padding: 40px;
+            text-align: center;
+        }
+
+        section#blog h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        #posts-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Blog Post */
+        .post {
+            background-color: #C9B09A;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .post h3 {
+            margin-top: 0;
+        }
+
+        .post p {
+            margin-bottom: 0;
+        }
+
+        /* Create New Post Section */
+        section#new-post {
+            background-color:#F7D9BC;
+            padding: 40px;
+            background-color: #;
+            text-align: center;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        form button {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #555;
+        }
+
+        /* Footer */
+        footer {
+            background-color:#C9B09 ;
+            color: #333;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>My Blog</h1>
+        <nav>
+            <ul>
+                <li><a href="Homee.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="#new-post">Create Post</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    
+    <section id="blog">
+        <h2>Blog Posts</h2>
+        <div id="posts-container">
+        
+        </div>
+    </section>
+
+    
+    <section id="new-post">
+        <h2>Create New Post</h2>
+        <form id="blogForm">
+            <input type="text" id="post-title" placeholder="Post Title" required>
+            <textarea id="post-content" placeholder="Write your post content here..." required></textarea>
+            <button type="submit">Submit Post</button>
+        </form>
+    </section>
+
+
+    <footer>
+        <p>&copy; 2024 Your Name</p>
+    </footer>
+
+    
+    <script>
+        
+        const initialPosts = [
+            { title: "Black Women In Tech", content: 
+            "There are numerous problems and hurdles that Black women in tech must overcome to gain access to the best resources and jobs. The value Black employees bring to any company, no matter their success in achieving an education and relevant knowledge, is often undermined or not recognized.The facts show that Black women are an underrepresented group in tech. NCWIT (National Centre for Women & Information Technology) has stated that of the 25% of all women working in tech, just 3% of them are Black women. A study conducted by BCS (British Computer Society) also supports this claim- Black women account for only 0.7% of all IT roles. On top of that, venture capital funding is not quite as common as it should be for individuals in the Black community who want to reach the forefront of the tech industry. The prejudice and dismissal of Black women (not just in the US) still exist, often hindering them from chasing their dreams.In this article, we will look at some of the problems that Black women face and their possible solutions, as well as some examples of Black women in tech that have achieved great success in computer science, coding, and other services." },
+            { title: "Second Post", content: "Here is some content for the second post." },
+        ];
+
+    
+        function renderPosts(posts) {
+            const postsContainer = document.getElementById('posts-container');
+            postsContainer.innerHTML = '';  
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.classList.add('post');
+                postElement.innerHTML = `
+                    <h3>${post.title}</h3>
+                    <p>${post.content}</p>
+                `;
+                postsContainer.appendChild(postElement);
+            });
+        }
+
+        
+        function addPost(title, content) {
+            const newPost = { title, content };
+            initialPosts.push(newPost); 
+            renderPosts(initialPosts);   
+        }
+
+
+        document.getElementById('blogForm').addEventListener('submit', function(event) {
+            event.preventDefault();  
+
+            const title = document.getElementById('post-title').value;
+            const content = document.getElementById('post-content').value;
+
+            if (title && content) {
+                addPost(title, content);  
+                document.getElementById('blogForm').reset(); 
+            } else {
+                alert('Please fill in both the title and content.');
+            }
+        });
+
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPosts(initialPosts);
+        });
+    </script>
+</body>
+</html>
